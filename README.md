@@ -1,4 +1,4 @@
-**Reduce the number of svchost.exe processes that appear in the Taskmanager**
+**Reduce the number of svchost.exe processes that appear in the Task Manager**
 
 Run the script as Admin, then reboot.
 
