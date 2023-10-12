@@ -14,6 +14,9 @@
 :: Updated: 10/12/2023
 ::
 
+:: Check if ran as Admin
+net session >nul 2>&1 || (echo. & echo Run Script As Admin & echo. & pause & exit)
+
 :: Get RAM in KB
 for /f "skip=1" %%p in ('wmic os get TotalVisibleMemorySize') do (
 set m=%%p
@@ -25,10 +28,3 @@ set /A DEC=0x%HEX%
 
 :: Set SVCHost Split Size
 reg add "HKLM\SYSTEM\CurrentControlSet\Control" /v SvcHostSplitThresholdInKB /t REG_DWORD /d "%DEC%" /f >nul 2>&1
-
-:: Disable Service Split
-reg add HKLM\SYSTEM\CurrentControlSet\Services\RapiMgr /v SvcHostSplitDisable /t REG_DWORD /d 1 /f >nul 2>&1
-reg add HKLM\SYSTEM\CurrentControlSet\Services\WcesComm /v SvcHostSplitDisable /t REG_DWORD /d 1 /f >nul 2>&1
-reg add HKLM\SYSTEM\CurrentControlSet\Services\WudfPf /v SvcHostSplitDisable /t REG_DWORD /d 1 /f >nul 2>&1
-reg add HKLM\SYSTEM\CurrentControlSet\Services\BFE /v SvcHostSplitDisable /t REG_DWORD /d 1 /f >nul 2>&1
-reg add "HKLM\SYSTEM\CurrentControlSet\Services\VMware Physical Disk Helper Service" /v SvcHostSplitDisable /t REG_DWORD /d 1 /f >nul 2>&1
